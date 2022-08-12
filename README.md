@@ -1,2 +1,2 @@
-# tagbot
+# Tagbot
 Tagbot
