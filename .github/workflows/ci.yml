@@ -35,7 +35,7 @@ jobs:
       #   run: echo "OK"
 
       - name: Npm ci
-        run: npm ci
+        run: cd api && npm ci
 
       - name: Build
         run: cd api && npm run build --if-present
@@ -50,4 +50,4 @@ jobs:
         run: cd api && npm run test
 
       # - name: Npm coverage
-      #   run: npm run test:cov
+      #   run: cd api && npm run test:cov
