@@ -31,17 +31,14 @@ jobs:
         with:
           node-version: 14.x
 
-      # - name: OK
-      #   run: echo "OK"
-
       - name: Npm ci
         run: cd api && npm ci
 
-      - name: Npm install
-        run: cd api && npm install
-
       - name: Build
         run: cd api && npm run build --if-present
+
+      - name: Npm install
+        run: cd api && npm install
 
       - name: Npm checkLint
         run: cd api && npm run lint
