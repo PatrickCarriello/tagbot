@@ -14,7 +14,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Cache node modules
+      - name: 🚚 Upgrade NPM
+        run: npm install -g npm
+
+      - name: 📦 Cache node modules
         uses: actions/cache@v2
         env:
           cache-name: cache-node-modules
@@ -31,20 +34,20 @@ jobs:
         with:
           node-version: 14.x
 
-      - name: Npm ci
+      - name: 👨‍💻 Npm ci
         run: cd api && npm ci
 
-      - name: Build
+      - name: 🔨 Build Project
         run: cd api && npm run build --if-present
 
-      - name: Npm install
+      - name: 💥 Npm install
         run: cd api && npm install
 
-      - name: Npm checkLint
+      - name: 🧹 Linting
         run: cd api && npm run lint
 
-      - name: Npm unitary test
+      - name: 🕵️ Unit Tests
         run: cd api && npm run test
 
-      # - name: Npm coverage
+      # - name: 🧪 Npm coverage
       #   run: cd api && npm run test:cov
