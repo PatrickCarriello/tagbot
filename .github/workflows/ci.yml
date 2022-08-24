@@ -34,8 +34,8 @@ jobs:
       # - name: OK
       #   run: echo "OK"
 
-      #     - name: Npm ci
-      #       run: npm ci
+      - name: Npm ci
+        run: npm ci
 
       - name: Build
         run: cd api && npm run build --if-present
