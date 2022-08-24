@@ -4,9 +4,8 @@ on:
 
 jobs:
   info:
-    name: OK
     runs-on: ubuntu-latest
 
     steps:
       - name: OK
-      - run: echo OK
+        run: echo OK
