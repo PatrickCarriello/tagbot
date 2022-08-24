@@ -1,11 +1,53 @@
-name: CI
+name: API Node.js CI
 on:
-  workflow_dispatch:
+  pull_request:
+
+  push:
+    branches:
+      - main
 
 jobs:
   info:
+    name: Echo OK
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+
       - name: OK
-        run: echo OK
+        run: cd api && echo "OK"
+
+      #     - name: Npm ci
+      #       run: npm ci
+
+      - name: Build
+        run: npm run build --if-present
+
+      - name: Npm install
+        run: npm install
+
+      - name: Npm checkLint
+        run: npm run lint
+
+      - name: Npm unitary test
+        run: npm run test
+
+      # - name: Npm coverage
+      #   run: npm run test:cov
